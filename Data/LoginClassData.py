@@ -21,24 +21,18 @@ class TokenData(BaseModel):
 
 
 class User(BaseModel):
-    username: Optional[str] = None
-    email: Optional[str] = None
-    nick_name: Optional[str] = None
-    status: Optional[str] = None
-    user_id: Optional[str] = None
-    pwd_hash256: Optional[str] = None
-    authorization: Optional[str] = None
-    permissions: Optional[str] = None
+    id: Optional[int] = None
+    user_name: Optional[str] = None
+    user_email: Optional[str] = None
+    wx_open_id: Optional[str] = None
+    password: Optional[str] = None
 
-    def set(self, user_id, username, pwd_hash256, email, nick_name, status, permissions, authorization):
-        self.user_id = user_id
-        self.username = username
-        self.pwd_hash256 = pwd_hash256
-        self.email = email
-        self.nick_name = nick_name
-        self.status = status
-        self.permissions = permissions
-        self.authorization = authorization
+    def set(self, user_id, username, email, wx_open_id, password):
+        self.id = user_id
+        self.user_name = username
+        self.user_email = email
+        self.wx_open_id = wx_open_id
+        self.password = password
 
 
 if __name__ == '__main__':

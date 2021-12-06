@@ -11,7 +11,7 @@ from passlib.context import CryptContext
 
 SECRET_KEY = "yintian710"
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+ACCESS_TOKEN_EXPIRE_MINUTES = 3000
 
 fake_users_db = {
     "yintian": {

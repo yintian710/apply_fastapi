@@ -13,7 +13,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 
 from Data.LoginClassData import User, Token
 from Data.RegisterData import RegisterData
-from component.Login.LoginCONTENT import fake_users_db, ACCESS_TOKEN_EXPIRE_MINUTES
+from component.Login.LoginCONTENT import ACCESS_TOKEN_EXPIRE_MINUTES
 from component.Login.LoginTool import authenticate_user, create_access_token, get_current_active_user, \
     verify_for_regis_, activate_account
 from component.Login.Register import Register
@@ -35,7 +35,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": user.username}, expires_delta=access_token_expires
+        data={"sub": user.user_name}, expires_delta=access_token_expires
     )
     return {"access_token": access_token, "token_type": "bearer"}
 
@@ -66,7 +66,7 @@ async def read_users_me(current_user: User = Depends(get_current_active_user)):
 
 @login.get("/me/items")
 async def read_own_items(current_user: User = Depends(get_current_active_user)):
-    return [{"item_id": "Foo", "owner": current_user.username}]
+    return [{"item_id": "Foo", "owner": current_user.user_name}]
 
 
 if __name__ == '__main__':

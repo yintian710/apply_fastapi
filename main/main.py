@@ -19,11 +19,13 @@ work_path = path.split('/main')[0]
 sys.path.append(work_path)
 sys.path.append(work_path + '/main')
 from routes.login_route import login
+from routes.apply_route import apply
 
 app = FastAPI(docs_url='/yintian', redoc_url='/re_yintian')
 
 route_list = [
     login,
+    apply
 ]
 
 for route in route_list:
