@@ -13,10 +13,12 @@ from fastapi.security import OAuth2PasswordRequestForm
 
 from Data.LoginClassData import User, Token
 from Data.RegisterData import RegisterData
+from Data.WxLoginData import WxLoginData
 from component.Login.LoginCONTENT import ACCESS_TOKEN_EXPIRE_MINUTES
 from component.Login.LoginTool import authenticate_user, create_access_token, get_current_active_user, \
     verify_for_regis_, activate_account
 from component.Login.Register import Register
+from component.Login.WxLogin import WxLogin
 
 login = APIRouter(
     prefix='/login',
@@ -38,6 +40,13 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         data={"sub": user.user_name}, expires_delta=access_token_expires
     )
     return {"access_token": access_token, "token_type": "bearer"}
+
+
+@login.post('/wx')
+async def wx(data: WxLoginData):
+    cls = WxLogin(data)
+    result = await cls.start()
+    return result
 
 
 @login.post('/regis')
